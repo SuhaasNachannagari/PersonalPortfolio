@@ -4,25 +4,25 @@ import { OrbitControls } from '@react-three/drei'
 import { useMediaQuery } from 'react-responsive'
 
 import { Basketball } from './Basketball.jsx'
-import { Laptop } from './Laptop.jsx'
+import { Laptop } from './Modern_slim_laptop.jsx'
 import { Cupcake } from './Cupcake.jsx'
 import { Guitar } from './Guitar.jsx'
 import Particles from './Particles.jsx'
 
 // Your model list
-const models = [Guitar, Laptop, Cupcake, Basketball]
+const models = [Laptop, Guitar, Cupcake, Basketball]
 
 const scaleMap = {
   Basketball: 1.5,
-  Laptop: 11,
+  Laptop: 10,
   Cupcake: 2.0,
   Guitar: 1
 }
 
 const positionMap = {
   Basketball: [0, -0.25, 0],
-  Laptop: [-6.67854, -0.55, -2.04642],
-  Cupcake: [0, -1.0, 0],
+  Laptop: [0, -1.5, 0],
+  Cupcake: [0, -2.0, 0],
   Guitar: [0, -2.25, 0]
 }
 
@@ -30,7 +30,7 @@ const rotationMap = {
   Basketball: [0, 0, 0],
   Laptop: [0, 0, 0],
   Cupcake: [0, 0, 0],
-  Guitar: [-0.5, 0, 0.5]
+  Guitar: [0, 0, 0.5]
 }
 
 const RotatingModel = ({ Component }) => {
@@ -47,7 +47,7 @@ const RotatingModel = ({ Component }) => {
   const rotation = rotationMap[name] || [0, 0, 0]
 
   return (
-    <group ref={ref} position={position} rotation={rotation} scale={scale}>
+    <group ref={ref} position={position} scale={scale}>
       {/* Uncomment to debug origin and axes */}
       {/* <axesHelper args={[2]} /> */}
       <Component />
@@ -71,12 +71,23 @@ const HeroExperience = () => {
 
   const CurrentModel = models[currentIndex]
 
+  const isLaptop = CurrentModel.name === 'Laptop'
+
   return (
     <Canvas camera={{ position: [0, 0, 15], fov: 45 }}>
       {/* Lights */}
-      <ambientLight intensity={0.4} color="#ffffff" />
-      <directionalLight position={[4, 10, 6]} intensity={1} castShadow color="#ffffff" />
-      <directionalLight position={[-4, -2, -4]} intensity={0.5} color="#eeeeff" />
+      <ambientLight intensity={isLaptop ? 1.0 : 0.4} color="#ffffff" />
+      <directionalLight
+        position={[4, 10, 6]}
+        intensity={isLaptop ? 15 : 1}
+        castShadow
+        color="#ffffff"
+      />
+      <directionalLight
+        position={[-4, -2, -4]}
+        intensity={isLaptop ? 5 : 0.5}
+        color="#eeeeff"
+      />
 
       {/* Controls */}
       <OrbitControls
