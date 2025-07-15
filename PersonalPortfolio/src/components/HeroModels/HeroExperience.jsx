@@ -9,28 +9,29 @@ import { Cupcake } from './Cupcake.jsx'
 import { Guitar } from './Guitar.jsx'
 import Particles from './Particles.jsx'
 
-// Your model list
+// List of model components
 const models = [Laptop, Guitar, Cupcake, Basketball]
 
+// Transform maps
 const scaleMap = {
-  Basketball: 1.5,
-  Laptop: 100,
+  Laptop: 10,
+  Guitar: 1,
   Cupcake: 2.0,
-  Guitar: 1
+  Basketball: 1.5,
 }
 
 const positionMap = {
-  Basketball: [0, -0.25, 0],
   Laptop: [0, -1.5, 0],
-  Cupcake: [0, -4.0, 0],
-  Guitar: [0, -2.25, 0]
+  Guitar: [0, -2.25, 0],
+  Cupcake: [0, -2.0, 0],
+  Basketball: [0, -0.25, 0],
 }
 
 const rotationMap = {
-  Basketball: [0, 0, 0],
   Laptop: [0, 0, 0],
+  Guitar: [-0.5, 0, 0.5],
   Cupcake: [0, 0, 0],
-  Guitar: [0, 0, 0.5]
+  Basketball: [0, 0, 0],
 }
 
 const RotatingModel = ({ Component }) => {
@@ -43,19 +44,20 @@ const RotatingModel = ({ Component }) => {
 
   const name = Component.name
   const position = positionMap[name] || [0, 0, 0]
-  const scale = scaleMap[name] || 1
+  const scaleValue = scaleMap[name] || 1
   const rotation = rotationMap[name] || [0, 0, 0]
+  const scale = Array.isArray(scaleValue)
+    ? scaleValue
+    : [scaleValue, scaleValue, scaleValue]
 
   return (
-    <group ref={ref} position={position} scale={scale}>
-      {/* Uncomment to debug origin and axes */}
-      {/* <axesHelper args={[2]} /> */}
-      <Component />
+    <group ref={ref}>
+      <Component scale={scale} position={position} rotation={rotation} />
     </group>
   )
 }
 
-// Memoize Particles so it doesn’t remount
+// Memoized particle system
 const PersistentParticles = memo(() => <Particles count={100} />)
 
 const HeroExperience = () => {
@@ -70,7 +72,6 @@ const HeroExperience = () => {
   }, [])
 
   const CurrentModel = models[currentIndex]
-
   const isLaptop = CurrentModel.name === 'Laptop'
 
   return (
