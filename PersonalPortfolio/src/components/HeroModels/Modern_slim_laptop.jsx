@@ -1,13 +1,9 @@
 import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export function Laptop({ scale = 1000, position = [0, 0, 0], rotation = [0, 0, 0] }) {
+export function Laptop() {
   const { scene } = useGLTF('/models/modern_slim_laptop.glb')
-  return (
-    <group scale={scale} position={position} rotation={rotation}>
-      <primitive object={scene} />
-    </group>
-  )
+  return <primitive object={scene} />
 }
 
 useGLTF.preload('/models/modern_slim_laptop.glb')

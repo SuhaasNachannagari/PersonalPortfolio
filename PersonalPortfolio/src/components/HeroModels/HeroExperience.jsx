@@ -10,29 +10,16 @@ import { Guitar } from './Guitar.jsx'
 import Particles from './Particles.jsx'
 
 // List of model components
-const models = [Laptop]
+const models = [Laptop, Guitar, Cupcake, Basketball]
 
 // Transform maps — add Laptop here too!
 const scaleMap = {
-  Laptop: 100,             // 👈 add this
+  Laptop: 1,             // 👈 add this
   Guitar: 1,
-  Cupcake: 2.0,
-  Basketball: 1.5,
+  Cupcake: 1,
+  Basketball: 1,
 }
 
-const positionMap = {
-  Laptop: [0, -1.5, 0],   // 👈 add this
-  Guitar: [0, -2.25, 0],
-  Cupcake: [0, -2.0, 0],
-  Basketball: [0, -0.25, 0],
-}
-
-const rotationMap = {
-  Laptop: [0, 0, 0],      // 👈 add this
-  Guitar: [-0.5, 0, 0.5],
-  Cupcake: [0, 0, 0],
-  Basketball: [0, 0, 0],
-}
 
 const RotatingModel = ({ Component }) => {
   const ref = useRef()
@@ -43,16 +30,16 @@ const RotatingModel = ({ Component }) => {
   })
 
   const name = Component.name
-  const position = positionMap[name] || [0, 0, 0]
   const scaleValue = scaleMap[name] || 1
-  const rotation = rotationMap[name] || [0, 0, 0]
   const scale = Array.isArray(scaleValue)
     ? scaleValue
     : [scaleValue, scaleValue, scaleValue]
 
   return (
     <group ref={ref}>
-      <Component scale={scale} position={position} rotation={rotation} />
+      <Component
+        scale={scale}
+      />
     </group>
   )
 }
@@ -80,7 +67,7 @@ const HeroExperience = () => {
       <ambientLight intensity={isLaptop ? 1.0 : 0.4} color="#ffffff" />
       <directionalLight
         position={[4, 10, 6]}
-        intensity={isLaptop ? 15 : 1}
+        intensity={isLaptop ? 50 : 1}
         castShadow
         color="#ffffff"
       />
