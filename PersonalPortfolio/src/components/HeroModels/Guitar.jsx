@@ -10,8 +10,8 @@ Title: Low Poly Classical Guitar
 import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export function Model(props) {
-  const { nodes, materials } = useGLTF('/low_poly_classical_guitar.glb')
+export function Guitar(props) {
+  const { nodes, materials } = useGLTF('/models/low_poly_classical_guitar.glb')
   return (
     <group {...props} dispose={null}>
       <group position={[0.081, 0.827, 0.044]} scale={[0.005, 0.01, 0.006]}>
@@ -28,4 +28,4 @@ export function Model(props) {
   )
 }
 
-useGLTF.preload('/low_poly_classical_guitar.glb')
+useGLTF.preload('/models/low_poly_classical_guitar.glb')

@@ -1,48 +1,53 @@
 import { OrbitControls } from '@react-three/drei'
 import { Canvas, useFrame } from '@react-three/fiber'
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, memo } from 'react'
 import { useMediaQuery } from 'react-responsive'
 
 import { Basketball } from './Basketball.jsx'
 import { Laptop } from './Laptop.jsx'
 import { Cupcake } from './Cupcake.jsx'
+import { Guitar } from './Guitar.jsx'
+import Particles from './Particles.jsx'
 
-const models = [Basketball, Laptop, Cupcake]
+// Your model list
+const models = [Guitar, Laptop, Cupcake, Basketball]
 
 const scaleMap = {
-  Basketball: 2,
-  Laptop: 12,
-  Cupcake: 2,
+  Basketball: 1.5,
+  Laptop: 11,
+  Cupcake: 2.0,
+  Guitar: 1
+}
+
+const positionMap = {
+  Basketball: [0, -0.25, 0],
+  Laptop: [-6.67854, -0.55, -2.04642],
+  Cupcake: [0, -1.0, 0],
+  Guitar: [0, -2.25, 0]
+}
+
+const rotationMap = {
+  Basketball: [0, 0, 0],
+  Laptop: [0, 0, 0],
+  Cupcake: [0, 0, 0],
+  Guitar: [-0.5, 0, 0.5]
 }
 
 const RotatingModel = ({ Component }) => {
-  const ref = React.useRef()
-
+  const ref = useRef()
   useFrame((_, delta) => {
     if (ref.current) {
-      ref.current.rotation.y += (Math.PI * 2 / 10) * delta
+      ref.current.rotation.y += (Math.PI * 2 / 30) * delta
     }
   })
-
-  // Position offsets per model (tweak Y to lower)
-  const positionMap = {
-    Basketball: [0, -.25, 0],           // Keep basketball as is
-    Laptop: [-6.67854, -.55, -2.04642],  // Lowered Laptop by ~1.5 on Y axis
-    Cupcake: [0, -1.0, 0],          // Lower cupcake by ~1.2 on Y axis
-  }
-
-  const scaleMap = {
-    Basketball: 1.5,
-    Laptop: 11,
-    Cupcake: 2.0,
-  }
 
   const name = Component.name
   const position = positionMap[name] || [0, 0, 0]
   const scale = scaleMap[name] || 1
+  const rotation = rotationMap[name] || [0, 0, 0]
 
   return (
-    <group ref={ref} scale={scale}>
+    <group ref={ref} scale={scale} rotation={rotation}>
       <group position={position}>
         <Component />
       </group>
@@ -50,18 +55,17 @@ const RotatingModel = ({ Component }) => {
   )
 }
 
-
+// 🧊 Memoize Particles so it doesn’t remount
+const PersistentParticles = memo(() => <Particles count={100} />)
 
 const HeroExperience = () => {
   const isTablet = useMediaQuery({ query: '(max-width: 1024px)' })
-  const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
   const [currentIndex, setCurrentIndex] = useState(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % models.length)
-    }, 10000)
-
+    }, 7500)
     return () => clearInterval(interval)
   }, [])
 
@@ -69,8 +73,12 @@ const HeroExperience = () => {
 
   return (
     <Canvas camera={{ position: [0, 0, 15], fov: 45 }}>
-      <ambientLight intensity={0.2} color="#1a1a40" />
-      <directionalLight position={[5, 5, 5]} intensity={1} />
+      {/* Ambient & Directional lighting */}
+      <ambientLight intensity={0.4} color="#ffffff" />
+      <directionalLight position={[4, 10, 6]} intensity={1} castShadow color="#ffffff" />
+      <directionalLight position={[-4, -2, -4]} intensity={0.5} color="#eeeeff" />
+
+      {/* Controls */}
       <OrbitControls
         enablePan={false}
         enableZoom={!isTablet}
@@ -79,6 +87,11 @@ const HeroExperience = () => {
         minPolarAngle={Math.PI / 5}
         maxPolarAngle={Math.PI / 2}
       />
+
+      {/* Background particles (won’t reset now) */}
+      <PersistentParticles />
+
+      {/* Current rotating model */}
       <RotatingModel Component={CurrentModel} />
     </Canvas>
   )

@@ -258,26 +258,27 @@ section {
     @apply w-36 h-full absolute bottom-0 z-20;
   }
 
+
   .tech-card-animated-bg {
-    @apply absolute left-0 bottom-[-100%] w-full h-full bg-[#2D3240] group-hover:bottom-0 transition-all duration-700;
+    @apply absolute left-0 top-full w-full h-full bg-[#2D3240]/80 group-hover:top-0 transition-all duration-700 ease-in-out z-0;
   }
-
+  
   .tech-card-content {
-    @apply flex flex-col md:justify-center items-center xl:gap-5 xl:h-[50vh] overflow-hidden relative z-10 group-hover:cursor-grab;
-
+    @apply relative z-10 flex flex-col items-center justify-center gap-3 h-48;
+  
     & p {
-      @apply text-lg 2xl:text-2xl pb-5 xl:pb-0 font-semibold text-white-50 text-center;
+      @apply text-sm md:text-base xl:text-lg font-semibold text-white-50 text-center pt-2;
     }
   }
-
-  .tech-grid {
-    @apply grid xl:grid-cols-5 md:grid-cols-3 grid-cols-1 xl:gap-16 md:gap-10 gap-5 mt-16;
-  }
-
+  
   .tech-icon-wrapper {
-    @apply flex justify-center items-center w-52 h-60 relative;
+    @apply flex justify-center items-center w-28 h-28 relative;
   }
-
+  
+  .tech-grid {
+    @apply grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-5 md:gap-8 mt-16;
+  }
+  
   form {
     label {
       @apply block text-white-50 mb-2;

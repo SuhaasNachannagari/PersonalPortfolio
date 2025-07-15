@@ -11,10 +11,6 @@ const navLinks = [
     name: "Skills",
     link: "#skills",
   },
-  {
-    name: "Testimonials",
-    link: "#testimonials",
-  },
 ];
 
 
@@ -113,13 +109,13 @@ const techStackImgs = [
 const techStackIcons = [
   {
     name: "React Developer",
-    modelPath: "/models/react_logo-transformed.glb",
+    modelPath: "/models/basketball.glb",
     scale: 1,
     rotation: [0, 0, 0],
   },
   {
     name: "Python Developer",
-    modelPath: "/models/python-transformed.glb",
+    modelPath: "/models/oreo_cupcake.glb",
     scale: 0.8,
     rotation: [0, 0, 0],
   },
@@ -145,39 +141,24 @@ const techStackIcons = [
 
 const expCards = [
   {
-    review: "Adrian brought creativity and technical expertise to the team, significantly improving our frontend performance. His work has been invaluable in delivering faster experiences.",
-    imgPath: "/images/exp1.png",
-    logoPath: "/images/logo1.png",
-    title: "Frontend Developer",
-    date: "January 2023 - Present",
+    imgPath: "/images/Inogen.png",
+    title: "Machine Learning Engineering Intern",
+    date: "August 2023 - May 2024",
     responsibilities: [
-      "Developed and maintained user-facing features for the Hostinger website.",
-      "Collaborated closely with UI/UX designers to ensure seamless user experiences.",
-      "Optimized web applications for maximum speed and scalability.",
+      "Cleaned and analyzed 20 years of maintenance data for Portable Oxygen Concentrators utilizing PANDAs",
+      "Processing records logged every 5 seconds employing R and Tableau to identify key failure patterns and trends",
+      "Optimized Time Series and Random Forest models to 92% accuracy, predicting device failures for newest product",
     ],
   },
   {
-    review: "Adrian’s contributions to Docker's web applications have been outstanding. He approaches challenges with a problem-solving mindset.",
-    imgPath: "/images/exp2.png",
-    logoPath: "/images/logo2.png",
-    title: "Full Stack Developer",
-    date: "June 2020 - December 2023",
+    imgPath: "/images/MSHGlobal.png",
+    title: "Software Engineering Intern",
+    date: "June 2025 - Present",
     responsibilities: [
-      "Led the development of Docker's web applications, focusing on scalability.",
-      "Worked with backend engineers to integrate APIs seamlessly with the frontend.",
-      "Contributed to open-source projects that were used with the Docker ecosystem.",
-    ],
-  },
-  {
-    review: "Adrian’s work on Appwrite’s mobile app brought a high level of quality and efficiency. He delivered solutions that enhanced our mobile experience & meet our product goals.",
-    imgPath: "/images/exp3.png",
-    logoPath: "/images/logo3.png",
-    title: "React Native Developer",
-    date: "March 2019 - May 2020",
-    responsibilities: [
-      "Built cross-platform mobile apps using React Native, integrating with Appwrite's backend services.",
-      "Improved app performance and user experience through code optimization and testing.",
-      "Coordinated with the product team to implement features based on feedback.",
+      "Stored and secured 2.5M+ insurance policy records on Azure PostgreSQL",
+      "Deployed an internal LangGraph tool actively used for both employee and customer data queries",
+      "Leveraged FAISS for fast semantic search producing sub-2 second responses for 2,000+ token context windows",
+      "Implemented OAuth and access controls to secure private data ensuring authorized user access",
     ],
   },
 ];
