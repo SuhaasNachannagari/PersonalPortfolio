@@ -14,7 +14,7 @@ const models = [Laptop]
 
 // Transform maps — add Laptop here too!
 const scaleMap = {
-  Laptop: 10,             // 👈 add this
+  Laptop: 100,             // 👈 add this
   Guitar: 1,
   Cupcake: 2.0,
   Basketball: 1.5,
