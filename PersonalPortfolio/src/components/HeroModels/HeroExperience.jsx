@@ -14,7 +14,7 @@ const models = [Laptop, Guitar, Cupcake, Basketball]
 
 const scaleMap = {
   Basketball: 1.5,
-  Laptop: 10,
+  Laptop: 100,
   Cupcake: 2.0,
   Guitar: 1
 }
@@ -22,7 +22,7 @@ const scaleMap = {
 const positionMap = {
   Basketball: [0, -0.25, 0],
   Laptop: [0, -1.5, 0],
-  Cupcake: [0, -2.0, 0],
+  Cupcake: [0, -4.0, 0],
   Guitar: [0, -2.25, 0]
 }
 
