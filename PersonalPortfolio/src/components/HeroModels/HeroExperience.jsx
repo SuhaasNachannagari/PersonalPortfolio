@@ -10,25 +10,25 @@ import { Guitar } from './Guitar.jsx'
 import Particles from './Particles.jsx'
 
 // List of model components
-const models = [Laptop, Guitar, Cupcake, Basketball]
+const models = [Laptop]
 
-// Transform maps
+// Transform maps — add Laptop here too!
 const scaleMap = {
-  Laptop: 10,
+  Laptop: 10,             // 👈 add this
   Guitar: 1,
   Cupcake: 2.0,
   Basketball: 1.5,
 }
 
 const positionMap = {
-  Laptop: [0, -1.5, 0],
+  Laptop: [0, -1.5, 0],   // 👈 add this
   Guitar: [0, -2.25, 0],
   Cupcake: [0, -2.0, 0],
   Basketball: [0, -0.25, 0],
 }
 
 const rotationMap = {
-  Laptop: [0, 0, 0],
+  Laptop: [0, 0, 0],      // 👈 add this
   Guitar: [-0.5, 0, 0.5],
   Cupcake: [0, 0, 0],
   Basketball: [0, 0, 0],
