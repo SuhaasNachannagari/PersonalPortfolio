@@ -1,6 +1,6 @@
-import { OrbitControls } from '@react-three/drei'
+import React, { useRef, useState, useEffect, memo, Suspense } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import React, { useRef, useState, useEffect, memo } from 'react'
+import { OrbitControls } from '@react-three/drei'
 import { useMediaQuery } from 'react-responsive'
 
 import { Basketball } from './Basketball.jsx'
@@ -47,15 +47,15 @@ const RotatingModel = ({ Component }) => {
   const rotation = rotationMap[name] || [0, 0, 0]
 
   return (
-    <group ref={ref} scale={scale} rotation={rotation}>
-      <group position={position}>
-        <Component />
-      </group>
+    <group ref={ref} position={position} rotation={rotation} scale={scale}>
+      {/* Uncomment to debug origin and axes */}
+      {/* <axesHelper args={[2]} /> */}
+      <Component />
     </group>
   )
 }
 
-// 🧊 Memoize Particles so it doesn’t remount
+// Memoize Particles so it doesn’t remount
 const PersistentParticles = memo(() => <Particles count={100} />)
 
 const HeroExperience = () => {
@@ -73,7 +73,7 @@ const HeroExperience = () => {
 
   return (
     <Canvas camera={{ position: [0, 0, 15], fov: 45 }}>
-      {/* Ambient & Directional lighting */}
+      {/* Lights */}
       <ambientLight intensity={0.4} color="#ffffff" />
       <directionalLight position={[4, 10, 6]} intensity={1} castShadow color="#ffffff" />
       <directionalLight position={[-4, -2, -4]} intensity={0.5} color="#eeeeff" />
@@ -88,11 +88,13 @@ const HeroExperience = () => {
         maxPolarAngle={Math.PI / 2}
       />
 
-      {/* Background particles (won’t reset now) */}
+      {/* Background Particles */}
       <PersistentParticles />
 
-      {/* Current rotating model */}
-      <RotatingModel Component={CurrentModel} />
+      {/* Suspense for smooth loading */}
+      <Suspense fallback={null}>
+        <RotatingModel Component={CurrentModel} />
+      </Suspense>
     </Canvas>
   )
 }
