@@ -17,6 +17,9 @@ import R from "../components/models/tech_logos/R";
 import SQL from "../components/models/tech_logos/SQL";
 import JavaScript from "../components/models/tech_logos/JavaScript";
 import Python from "../components/models/tech_logos/Python";
+import PyTorch from "../components/models/tech_logos/PyTorch";
+import Pandas from "../components/models/tech_logos/pandas";
+
 
 // Dummy placeholder components
 const FakeTech1 = () => <div style={{ width: 80, height: 80, background: "#eee", borderRadius: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>Empty 1</div>;
@@ -65,17 +68,7 @@ const TechStack = () => {
         {/* Section: Languages */}
         <SectionTitle title="Languages" />
         <div className="tech-grid">
-          <div className="card-border tech-card overflow-hidden group xl:rounded-full rounded-lg">
-            <div className="tech-card-animated-bg" />
-            <div className="tech-card-content">
-              <div className="tech-icon-wrapper">
-                <C model={{ name: "C", rotation: [0, 0, 0] }} />
-              </div>
-              <div className="padding-x w-full">
-                <p>C</p>
-              </div>
-            </div>
-          </div>
+          
           <div className="card-border tech-card overflow-hidden group xl:rounded-full rounded-lg">
             <div className="tech-card-animated-bg" />
             <div className="tech-card-content">
@@ -117,17 +110,6 @@ const TechStack = () => {
               </div>
               <div className="padding-x w-full">
                 <p>Python</p>
-              </div>
-            </div>
-          </div>
-          <div className="card-border tech-card overflow-hidden group xl:rounded-full rounded-lg">
-            <div className="tech-card-animated-bg" />
-            <div className="tech-card-content">
-              <div className="tech-icon-wrapper">
-                <R model={{ name: "R", rotation: [0, 0, 0] }} />
-              </div>
-              <div className="padding-x w-full">
-                <p>R</p>
               </div>
             </div>
           </div>
@@ -181,6 +163,7 @@ const TechStack = () => {
               </div>
             </div>
           </div>
+
         </div>
 
         {/* Section: Libraries */}
@@ -241,31 +224,119 @@ const TechStack = () => {
               </div>
             </div>
           </div>
-        </div>
-        
-        
-
-        {/* Section: Coming Soon */}
-        <SectionTitle title="Coming Soon" />
-        <div className="tech-grid">
-          {[FakeTech1, FakeTech2, FakeTech3, FakeTech4, FakeTech5].map((FakeComponent, i) => (
-            <div
-              key={i}
-              className="card-border tech-card overflow-hidden group xl:rounded-full rounded-lg"
-            >
-              <div className="tech-card-animated-bg" />
-              <div className="tech-card-content">
-                <div className="tech-icon-wrapper">
-                  <FakeComponent />
-                </div>
-                <div className="padding-x w-full">
-                  <p>{`Coming Soon ${i + 1}`}</p>
-                </div>
+          <div className="card-border tech-card overflow-hidden group xl:rounded-full rounded-lg">
+            <div className="tech-card-animated-bg" />
+            <div className="tech-card-content">
+              <div className="tech-icon-wrapper">
+                <PyTorch model={{ name: "PyTorch", rotation: [0, 0, 0] }} />
+              </div>
+              <div className="padding-x w-full">
+                <p>PyTorch</p>
               </div>
             </div>
-          ))}
+          </div>
+          <div className="card-border tech-card overflow-hidden group xl:rounded-full rounded-lg">
+            <div className="tech-card-animated-bg" />
+            <div className="tech-card-content">
+              <div className="tech-icon-wrapper">
+                <Pandas model={{ name: "pandas", rotation: [0, 0, 0] }} />
+              </div>
+              <div className="padding-x w-full">
+                <p>pandas</p>
+              </div>
+            </div>
+          </div>
         </div>
 
+        {/* Section: Tools and Platforms */}
+
+        <SectionTitle title="Tools and Platforms" />
+        <div className="tech-grid">
+          <div className="card-border tech-card overflow-hidden group xl:rounded-full rounded-lg">
+            <div className="tech-card-animated-bg" />
+            <div className="tech-card-content">
+              <div className="tech-icon-wrapper">
+                <img 
+                  src="/images/aws_logo.png"
+                  alt="aws"
+                  className="w-full h-auto object-contain"
+                  style={{ maxWidth: '80px', maxHeight: '80px' }}
+                />
+              </div>
+              <div className="padding-x w-full">
+                <p>AWS</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="card-border tech-card overflow-hidden group xl:rounded-full rounded-lg">
+            <div className="tech-card-animated-bg" />
+            <div className="tech-card-content">
+              <div className="tech-icon-wrapper">
+                <img 
+                  src="/images/azure.png"
+                  alt="azure"
+                  className="w-full h-auto object-contain"
+                  style={{ maxWidth: '80px', maxHeight: '80px' }}
+                />
+              </div>
+              <div className="padding-x w-full">
+                <p>Azure</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="card-border tech-card overflow-hidden group xl:rounded-full rounded-lg">
+            <div className="tech-card-animated-bg" />
+            <div className="tech-card-content">
+              <div className="tech-icon-wrapper">
+                <img 
+                  src="/images/git.png"
+                  alt="git"
+                  className="w-full h-auto object-contain"
+                  style={{ maxWidth: '80px', maxHeight: '80px' }}
+                />
+              </div>
+              <div className="padding-x w-full">
+                <p>Git</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="card-border tech-card overflow-hidden group xl:rounded-full rounded-lg">
+            <div className="tech-card-animated-bg" />
+            <div className="tech-card-content">
+              <div className="tech-icon-wrapper">
+                <img 
+                  src="/images/docker.png"
+                  alt="docker"
+                  className="w-full h-auto object-contain"
+                  style={{ maxWidth: '80px', maxHeight: '80px' }}
+                />
+              </div>
+              <div className="padding-x w-full">
+                <p>Docker</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="card-border tech-card overflow-hidden group xl:rounded-full rounded-lg">
+            <div className="tech-card-animated-bg" />
+            <div className="tech-card-content">
+              <div className="tech-icon-wrapper">
+                <img 
+                  src="/images/tableau.png"
+                  alt="tableau"
+                  className="w-full h-auto object-contain"
+                  style={{ maxWidth: '80px', maxHeight: '80px' }}
+                />
+              </div>
+              <div className="padding-x w-full">
+                <p>Tableau</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
