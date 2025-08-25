@@ -57,7 +57,7 @@ const AppShowcase = () => {
               </p>
               <div className="mt-1 space-x-4">
                 <a
-                  href="https://github.com/..."
+                  href="https://github.com/SuhaasNachannagari/CourseCounselorAgent"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -68,7 +68,7 @@ const AppShowcase = () => {
                   />
                 </a>
                 <a
-                  href="https://project4-demo.vercel.app"
+                  href="https://www.purdueadvisor.com/"
                   target="_blank"
                   className="text-blue-500 hover:underline"
                 >
@@ -91,7 +91,7 @@ const AppShowcase = () => {
               </p>
               <div className="mt-1 space-x-4">
                 <a
-                  href="https://github.com/..."
+                  href="https://github.com/SuhaasNachannagari/6DegreesNFL"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -102,7 +102,7 @@ const AppShowcase = () => {
                   />
                 </a>
                 <a
-                  href="https://project4-demo.vercel.app"
+                  href="https://suhaasnach.pythonanywhere.com/"
                   target="_blank"
                   className="text-blue-500 hover:underline"
                 >
@@ -127,7 +127,7 @@ const AppShowcase = () => {
               </p>
               <div className="mt-1 space-x-4">
                 <a
-                  href="https://github.com/..."
+                  href="https://github.com/SuhaasNachannagari/PersonalPortfolio"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -138,7 +138,7 @@ const AppShowcase = () => {
                   />
                 </a>
                 <a
-                  href="https://project4-demo.vercel.app"
+                  href="https://www.suhaasnachannagari.com/"
                   target="_blank"
                   className="text-blue-500 hover:underline"
                 >
@@ -215,7 +215,7 @@ const AppShowcase = () => {
               </p>
               <div className="mt-1 space-x-4">
                 <a
-                  href="https://github.com/..."
+                  href="https://github.com/PranayN23/NFLResourceAnalysis"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
