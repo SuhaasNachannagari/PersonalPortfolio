@@ -1,6 +1,7 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useState } from "react";
 
 import { expCards } from "../constants";
 import TitleHeader from "../components/TitleHeader";
@@ -9,52 +10,23 @@ import GlowCard from "../components/GlowCard";
 gsap.registerPlugin(ScrollTrigger);
 
 const Experience = () => {
-  useGSAP(() => {
-    // Loop through each timeline card and animate them in
-    // as the user scrolls to each card
-    gsap.utils.toArray(".timeline-card").forEach((card) => {
-      // Animate the card coming in from the left
-      // and fade in
-      gsap.from(card, {
-        // Move the card in from the left
-        xPercent: -100,
-        // Make the card invisible at the start
-        opacity: 0,
-        // Set the origin of the animation to the left side of the card
-        transformOrigin: "left left",
-        // Animate over 1 second
-        duration: 1,
-        // Use a power2 ease-in-out curve
-        ease: "power2.inOut",
-        // Trigger the animation when the card is 80% of the way down the screen
-        scrollTrigger: {
-          // The card is the trigger element
-          trigger: card,
-          // Trigger the animation when the card is 80% down the screen
-          start: "top 80%",
-        },
-      });
-    });
+  const [expandedIndex, setExpandedIndex] = useState(null);
 
-    // Animate the timeline height as the user scrolls
-    // from the top of the timeline to 70% down the screen
-    // The timeline height should scale down from 1 to 0
-    // as the user scrolls up the screen
+  const toggleExpand = (index) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
+
+  useGSAP(() => {
+
+
     gsap.to(".timeline", {
-      // Set the origin of the animation to the bottom of the timeline
       transformOrigin: "bottom bottom",
-      // Animate the timeline height over 1 second
       ease: "power1.inOut",
-      // Trigger the animation when the timeline is at the top of the screen
-      // and end it when the timeline is at 70% down the screen
       scrollTrigger: {
         trigger: ".timeline",
         start: "top center",
         end: "70% center",
-        // Update the animation as the user scrolls
         onUpdate: (self) => {
-          // Scale the timeline height as the user scrolls
-          // from 1 to 0 as the user scrolls up the screen
           gsap.to(".timeline", {
             scaleY: 1 - self.progress,
           });
@@ -62,37 +34,27 @@ const Experience = () => {
       },
     });
 
-    // Loop through each expText element and animate them in
-    // as the user scrolls to each text element
-    gsap.utils.toArray(".expText").forEach((text) => {
-      // Animate the text opacity from 0 to 1
-      // and move it from the left to its final position
-      // over 1 second with a power2 ease-in-out curve
-      gsap.from(text, {
-        // Set the opacity of the text to 0
-        opacity: 0,
-        // Move the text from the left to its final position
-        // (xPercent: 0 means the text is at its final position)
-        xPercent: 0,
-        // Animate over 1 second
-        duration: 1,
-        // Use a power2 ease-in-out curve
-        ease: "power2.inOut",
-        // Trigger the animation when the text is 60% down the screen
+    // Parallax on image cards
+    gsap.utils.toArray(".exp-card-img").forEach((img) => {
+      gsap.to(img, {
+        yPercent: -12,
+        ease: "none",
         scrollTrigger: {
-          // The text is the trigger element
-          trigger: text,
-          // Trigger the animation when the text is 60% down the screen
-          start: "top 60%",
+          trigger: img,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 0.6,
         },
       });
-    }, "<"); // position parameter - insert at the start of the animation
+    });
+
+
   }, []);
 
   return (
     <section
       id="experience"
-      className="flex-center md:mt-40 mt-20 section-padding xl:px-0"
+      className="flex-center section-padding xl:px-0"
     >
       <div className="w-full h-full md:px-20 px-5">
         <TitleHeader
@@ -100,47 +62,131 @@ const Experience = () => {
           sub="💼 My Career Overview"
         />
         <div className="mt-32 relative">
-          <div className="relative z-50 xl:space-y-32 space-y-10">
-            {expCards.map((card) => (
-              <div key={card.title} className="exp-card-wrapper">
-                <div className="xl:w-2/6">
-                  <GlowCard card={card}>
-                    <div>
-                      <img src={card.imgPath} alt="exp-img" />
+          {/* Global Timeline line for the entire section */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 h-full flex justify-center w-2" style={{ zIndex: 10 }}>
+            <div className="timeline absolute z-30 h-[105%] -top-10 w-14 md:w-28 bg-black" />
+            <div className="gradient-line w-2 h-full absolute z-20" />
+          </div>
+
+          <div className="relative z-50 xl:space-y-20 space-y-10 pt-10 pb-10">
+            {expCards.map((card, cardIndex) => {
+              const isExpanded = expandedIndex === cardIndex;
+              return (
+                <div key={card.company || card.title} className="relative flex justify-center w-full">
+                  {/* Card + slide-out container */}
+                  <div className="relative w-[90%] sm:w-[400px] xl:w-[450px] exp-card-img" style={{ zIndex: 60 }}>
+                    <div
+                      className="cursor-pointer transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] relative z-20 bg-black-100 rounded-xl"
+                      style={{
+                        transform: isExpanded ? "translateX(-65%)" : "translateX(0)",
+                      }}
+                      onClick={() => toggleExpand(cardIndex)}
+                    >
+                      <GlowCard card={card}>
+                        <div className="relative">
+                          <img src={card.imgPath} alt="exp-img" />
+                          {/* Position & date overlay */}
+                          <div className="mt-4 flex items-center justify-between gap-2 flex-wrap">
+                            <h2 className="font-semibold text-lg md:text-xl text-white">
+                              {card.title}
+                            </h2>
+                            <span className="text-white-50 text-sm whitespace-nowrap">
+                              {card.date}
+                            </span>
+                          </div>
+                          {/* Click hint indicator */}
+                          <div
+                            className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full transition-all duration-500"
+                            style={{
+                              background: isExpanded
+                                ? `rgba(${card.theme.iconColor ? card.theme.iconColor.rgb : card.theme.rgb}, 0.15)`
+                                : `rgba(${card.theme.iconColor ? card.theme.iconColor.rgb : card.theme.rgb}, 0.08)`,
+                              border: isExpanded
+                                ? `1px solid rgba(${card.theme.iconColor ? card.theme.iconColor.rgb : card.theme.rgb}, 0.4)`
+                                : `1px solid rgba(${card.theme.iconColor ? card.theme.iconColor.rgb : card.theme.rgb}, 0.2)`,
+                            }}
+                          >
+                            <svg
+                              className={`w-3.5 h-3.5 transition-transform duration-500 ${
+                                isExpanded ? "rotate-180" : ""
+                              }`}
+                              fill="none"
+                              stroke={card.theme.iconColor ? card.theme.iconColor.hex : card.theme.hex}
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M9 5l7 7-7 7"
+                              />
+                            </svg>
+                            <span
+                              className="text-[10px] font-medium tracking-wide uppercase transition-colors duration-500"
+                              style={{
+                                color: card.theme.iconColor ? card.theme.iconColor.hex : card.theme.hex,
+                              }}
+                            >
+                              {isExpanded ? "Close" : "Details"}
+                            </span>
+                          </div>
+                        </div>
+                      </GlowCard>
                     </div>
-                  </GlowCard>
-                </div>
-                <div className="xl:w-4/6">
-                  <div className="flex items-start">
-                    <div className="timeline-wrapper">
-                      <div className="timeline" />
-                      <div className="gradient-line w-2 h-full" />
-                    </div>
-                    <div className="expText flex xl:gap-20 md:gap-10 gap-5 relative z-20">
-                    <div className="w-5 h-5 rotate-45 ms-7.5 invisible"></div>
-                    <div className = "-mt-2">
-                        <h1 className="font-semibold text-3xl">{card.title}</h1>
-                        <p className="my-5 text-white-50">
-                          🗓️&nbsp;{card.date}
-                        </p>
-                        <p className="text-[#839CB5] italic">
-                          Responsibilities
-                        </p>
-                        <ul className="list-disc ms-5 mt-5 flex flex-col gap-5 text-white-50">
-                          {card.responsibilities.map(
-                            (responsibility, index) => (
-                              <li key={index} className="text-lg">
-                                {responsibility}
-                              </li>
-                            )
+
+                    {/* Slide-out details panel */}
+                    <div
+                      className="absolute top-0 left-0 w-full h-[calc(100%-1.25rem)] flex items-center transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] pointer-events-none z-10"
+                      style={{
+                        opacity: isExpanded ? 1 : 0,
+                        transform: isExpanded ? "translateX(65%)" : "translateX(0)",
+                      }}
+                    >
+                      <div
+                        className="w-full h-full rounded-xl p-6 md:p-8 border pointer-events-auto flex flex-col overflow-y-auto custom-scrollbar"
+                        style={{
+                          background: "linear-gradient(135deg, rgba(14,14,16,0.95), rgba(28,28,33,0.9))",
+                          borderColor: "rgba(98, 224, 255, 0.12)",
+                          backdropFilter: "blur(20px)",
+                          boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
+                        }}
+                      >
+                        <div className="my-auto">
+                          {card.company && (
+                            <span
+                              className="inline-block px-3 py-1 rounded-full text-xs font-semibold mb-4 w-fit"
+                              style={{
+                                background: card.featured
+                                  ? `linear-gradient(135deg, rgba(${card.theme.rgb}, 0.15), rgba(${card.theme.rgb}, 0.05))`
+                                  : "rgba(255, 255, 255, 0.06)",
+                                border: card.featured
+                                  ? `1px solid rgba(${card.theme.rgb}, 0.3)`
+                                  : "1px solid rgba(255, 255, 255, 0.1)",
+                                color: card.featured ? card.theme.hex : "#839CB5",
+                              }}
+                            >
+                              {card.company}
+                            </span>
                           )}
-                        </ul>
+                          <div className="flex items-center gap-2 mb-3">
+                            <svg className="w-4 h-4 text-[#839CB5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <p className="text-[#839CB5] font-medium text-sm">
+                              {card.location}
+                            </p>
+                          </div>
+                          <p className="text-white-50 text-xs md:text-sm leading-relaxed pr-2">
+                            {card.description}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

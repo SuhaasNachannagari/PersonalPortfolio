@@ -141,25 +141,44 @@ const techStackIcons = [
 
 const expCards = [
   {
-    imgPath: "/images/Inogen.png",
-    title: "Machine Learning Engineering Intern",
-    date: "August 2023 - May 2024",
-    responsibilities: [
-      "Cleaned and analyzed 20 years of maintenance data for Portable Oxygen Concentrators utilizing PANDAs",
-      "Processing records logged every 5 seconds employing R and Tableau to identify key failure patterns and trends",
-      "Optimized Time Series and Random Forest models to 92% accuracy, predicting device failures for newest product",
-    ],
+    imgPath: "/images/Amazon.png",
+    title: "Software Engineer Intern",
+    company: "AWS",
+    date: "Incoming Fall 2026",
+    theme: { hex: "#62e0ff", rgb: "98, 224, 255" },
+    featured: true,
+    location: "Seattle, WA",
+    description: "This fall, I'll be joining AWS on the Elastic Load Balancing team. I don't know much about the project yet, but my manager did suggest I read a book on Rust. So in my free time, I'm working on my summer reading assignment.",
+  },
+  {
+    imgPath: "/images/Splunk.png",
+    title: "Software Engineer Intern",
+    company: "Splunk",
+    date: "May 2026 - Present",
+    theme: { hex: "#ff8c00", rgb: "255, 140, 0", iconColor: { hex: "#62e0ff", rgb: "98, 224, 255" } },
+    featured: true,
+    location: "San Jose, CA",
+    description: "I'm currently at Splunk on the Data Orchestration team, working deep in the agentic ecosystem. I'm building an on-call triage agent for engineers on the Search Services organization, the team behind the search infrastructure much of Splunk's platform runs on. The system is a custom Claude plugin that spawns subagents across a range of MCPs and skills to triage incoming alerts, paired with a shell-based poller that automatically queues, triages, and summarizes each one, with the option to spawn Claude Code windows for engineers to dig deeper. It's been a crash course in harness engineering, and the importance of guardrails, grounding, and deterministic evaluation wherever possible.",
   },
   {
     imgPath: "/images/MSHGlobal.png",
     title: "Software Engineering Intern",
+    company: "MSH Global Inc",
     date: "June 2025 - Present",
-    responsibilities: [
-      "Stored and secured 2.5M+ insurance policy records on Azure PostgreSQL",
-      "Deployed an internal LangGraph tool actively used for both employee and customer data queries",
-      "Leveraged FAISS for fast semantic search producing sub-2 second responses for 2,000+ token context windows",
-      "Implemented OAuth and access controls to secure private data ensuring authorized user access",
-    ],
+    theme: { hex: "#00e57a", rgb: "0, 229, 122", glowRgb: "192, 192, 192" },
+    featured: false,
+    location: "Edison, NJ",
+    description: "MSH marked my introduction to agentic systems and the modern AI toolset, tasked with designing the data infrastructure for an entire insurance company. I architected a secure Azure PostgreSQL database supporting 2.5M+ policy records, deployed an internal LangGraph-based tool on top of it, and used FAISS for fast semantic search with OAuth-based access controls to safeguard sensitive data.",
+  },
+  {
+    imgPath: "/images/Inogen.png",
+    title: "Machine Learning Engineering Intern",
+    company: "Inogen",
+    date: "August 2023 - May 2024",
+    theme: { hex: "#ffab00", rgb: "255, 171, 0", glowRgb: "192, 192, 192" },
+    featured: false,
+    location: "West Lafayette, IN",
+    description: "My first hands-on experience with real-world data science came through Purdue's Data Mine program, in partnership with Inogen. The work was especially rewarding, since it centered on technology that helps people breathe. I led the analysis of 20 years of high-frequency maintenance data using Pandas, R, and Tableau to uncover key failure patterns, and built time series and random forest models that predicted device failures with 92% accuracy.",
   },
 ];
 

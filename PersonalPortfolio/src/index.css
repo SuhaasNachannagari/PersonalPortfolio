@@ -48,7 +48,7 @@ section {
   }
 
   .section-padding {
-    @apply px-5 md:px-10 md:mt-40 mt-20;
+    @apply px-5 md:px-10 py-5;
   }
 
   .mt-responsive {
@@ -461,4 +461,25 @@ section {
 
 .card:hover::before {
   opacity: 1;
+}
+/* Safe dynamic glow border specifically for the timeline cards */
+.timeline-card-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 2px;
+  background: rgb(var(--glow-rgb, 255, 255, 255));
+  background-attachment: fixed;
+  mask: linear-gradient(#0000, #0000),
+    conic-gradient(
+      from calc((var(--start) - 15) * 1deg),
+      rgba(255, 255, 255, 0.1) 0deg,
+      rgba(255, 255, 255, 1) 50deg,
+      rgba(255, 255, 255, 0) 100deg
+    );
+  mask-composite: intersect;
+  mask-clip: padding-box, border-box;
+  opacity: 0;
+  transition: 0.5s ease;
 }

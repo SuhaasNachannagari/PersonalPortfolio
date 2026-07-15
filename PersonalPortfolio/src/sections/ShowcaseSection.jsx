@@ -40,7 +40,7 @@ const AppShowcase = () => {
   }, []);
 
   return (
-    <div id="work" ref={sectionRef} className="app-showcase min-h-screen py-20">
+    <div id="work" ref={sectionRef} className="app-showcase min-h-screen pt-10 pb-5">
       <div className="w-full">
         <div className="showcaselayout">
           <div className="project-list-wrapper overflow-hidden">
